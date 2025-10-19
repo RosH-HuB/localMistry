@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Local Mistry — Furniture & Interiors</title>
+
+  <!-- Minimal styling (mobile-first) -->
+  <style>
+    :root{
+      --accent:#d97706;
+      --accent-dark:#b45309;
+      --muted:#666;
+      --card-bg:#fff;
+      --page-bg:#f7f7f8;
+      --radius:10px;
+      --max-w:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,Segoe UI,system-ui,-apple-system,Roboto,"Helvetica Neue",Arial;
+      background:var(--page-bg);
+      color:#1f2937;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a{color:inherit;text-decoration:none}
+    header{position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(6px);box-shadow:0 1px 8px rgba(2,6,23,0.06);z-index:60}
+    .container{max-width:var(--max-w);margin:0 auto;padding:16px}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo-sq{width:44px;height:44px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+    .brand h1{font-size:16px;margin:0}
+    .nav-links{display:flex;gap:14px;align-items:center}
+    .nav-links a{font-weight:600;color:#111;padding:6px 8px;border-radius:8px}
+    .nav-links a:hover{color:var(--accent)}
+
+    .cta{display:flex;gap:8px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:8px 14px;border-radius:9px;font-weight:700;border:none;cursor:pointer}
+    .btn.secondary{background:#111;color:#fff}
+    .btn:active{transform:translateY(1px)}
+
+    /* hamburger */
+    .hamburger{display:none;background:transparent;border:0;padding:8px;border-radius:8px}
+    .hamburger div{width:22px;height:2px;background:#222;margin:4px 0;border-radius:2px;transition:all .2s}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;padding:32px 0}
+    .hero h2{font-size:32px;margin:0;line-height:1.05}
+    .lead{color:var(--muted);margin-top:10px;font-size:16px}
+    .hero .img-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .project-img{width:100%;height:150px;object-fit:cover;border-radius:10px;box-shadow:0 6px 18px rgba(15,23,42,0.08);display:block}
+
+    /* sections */
+    section{padding:36px 0}
+    h3{font-size:22px;margin-bottom:14px}
+    .grid{display:grid;gap:18px}
+    .services{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .card{background:var(--card-bg);padding:18px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(15,23,42,0.04)}
+    .card h4{margin:0 0 8px 0}
+    .projects{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .projects .card img{height:180px;width:100%;object-fit:cover;border-radius:8px}
+
+    .two-col{display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:start}
+    .testimonials{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+
+    /* form */
+    form{display:flex;flex-direction:column;gap:10px}
+    input,textarea{padding:10px;border-radius:8px;border:1px solid #e5e7eb;font-size:14px}
+    textarea{resize:vertical;min-height:120px}
+
+    /* faq */
+    details{background:var(--card-bg);padding:14px;border-radius:10px;border:1px solid #f1f5f9}
+    details summary{cursor:pointer;font-weight:700}
+
+    footer{background:#0f1724;color:#e6eef8;padding:28px 0}
+    footer .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;align-items:start}
+    small{color:#9aa7bd}
+
+    /* responsiveness */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr; text-align:left}
+      .two-col{grid-template-columns:1fr; }
+      .hero .img-grid{grid-template-columns:repeat(2,1fr)}
+      .nav-links{display:none}
+      .hamburger{display:inline-flex}
+      .cta{display:none}
+    }
+    @media (max-width:480px){
+      .hero .project-img{height:120px}
+      .logo-sq{width:40px;height:40px}
+      .brand h1{font-size:15px}
+      .hero h2{font-size:26px}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:14px}
+    .tag{display:inline-block;background:#fffbeb;color:#92400e;padding:6px 10px;border-radius:999px;font-weight:700}
+    .mb8{margin-bottom:8px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" aria-label="Top navigation">
+      <nav>
+        <div class="brand" aria-hidden="false">
+          <div class="logo-sq" aria-hidden="true">LM</div>
+          <div>
+            <h1 style="margin:0;font-size:16px">Local Mistry</h1>
+            <div class="muted" style="font-size:12px">Home renovation & bespoke furniture</div>
+          </div>
+        </div>
+
+        <div class="nav-links" role="navigation" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="cta" aria-hidden="true">
+          <a class="btn" href="#projects">See Projects</a>
+          <a class="btn secondary" href="#contact">Get Quote</a>
+        </div>
+
+        <button class="hamburger" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+          <div></div><div></div><div></div>
+        </button>
+      </nav>
+    </div>
+
+    <!-- mobile menu (hidden by default) -->
+    <div id="mobileMenu" style="display:none;background:#fff;border-top:1px solid #eef2f7;">
+      <div class="container" style="padding:12px 16px;">
+        <a href="#services" style="display:block;padding:10px 0;border-bottom:1px solid #f3f4f6">Services</a>
+        <a href="#projects" style="display:block;padding:10px 0;border-bottom:1px solid #f3f4f6">Projects</a>
+        <a href="#about" style="display:block;padding:10px 0;border-bottom:1px solid #f3f4f6">About</a>
+        <a href="#contact" style="display:block;padding:10px 0">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="container hero" aria-labelledby="heroTitle">
+      <div>
+        <div class="tag mb8">One-stop renovation</div>
+        <h2 id="heroTitle">Local Mistry — Craftsmanship that transforms your home ✨</h2>
+        <p class="lead">We provide expert craftsmanship and full project management — custom woodworks, grills & metal, electrical, and complete interior execution.</p>
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn" href="#projects">See Our Projects</a>
+          <a class="btn secondary" href="#contact">Request Quote</a>
+        </div>
+      </div>
+
+      <div class="img-grid" aria-hidden="false">
+        <img class="project-img" src="https://lh3.googleusercontent.com/p/AF1QipPhFNWa1sL00qFSH9bwns25wM2BDQiUWfrH-a6-=s1360-w1360-h1020-rw">
+        <img class="project-img" src="https://lh3.googleusercontent.com/p/AF1QipMOMzrCI26uAUZOqYuF_MmCNqIt6cptNgLwG8Li=s1360-w1360-h1020-rw" alt="Project sample 2">
+        <img class="project-img" src="https://lh3.googleusercontent.com/p/AF1QipMl7jsiEIKoMXHWQplfaYUv4hpOptg3BlVqZKGq=s1360-w1360-h1020-rw" alt="Project sample 3">
+        <img class="project-img" src="https://lh3.googleusercontent.com/p/AF1QipOGb053O9UTGkFTjaaqw9uraVO7BQktqPAIXjv1=s1360-w1360-h1020-rw" alt="Project sample 4">
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="container" aria-labelledby="servicesTitle">
+      <h3 id="servicesTitle">Our Services</h3>
+      <div class="grid services">
+        <div class="card">
+          <h4>Custom Wooden Works</h4>
+          <p class="muted">Bespoke furniture, modular kitchens, wardrobes, TV units, wall panelling.</p>
+        </div>
+        <div class="card">
+          <h4>Grill & Metal Works</h4>
+          <p class="muted">Designer railings, safety grills, staircases and window grills.</p>
+        </div>
+        <div class="card">
+          <h4>Electrical Works</h4>
+          <p class="muted">Complete & concealed wiring, modern lighting setups, smart switches.</p>
+        </div>
+        <div class="card">
+          <h4>Complete Interior Execution</h4>
+          <p class="muted">False ceilings, painting & polishing, floor tiling, wall decor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="container" aria-labelledby="projectsTitle">
+      <h3 id="projectsTitle">Featured Projects</h3>
+      <div class="grid projects">
+        <div class="card">
+          <img src="https://lh3.googleusercontent.com/p/AF1QipPhw1voG9Q_-WWj57WGtmv89xwjAUQDehMboUTP=s1360-w1360-h1020-rw" alt="project 1">
+          <h4 style="margin-top:12px">Modern Kitchen</h4>
+          <p class="muted">Modular kitchen with concealed storage and quartz countertops.</p>
+        </div>
+        <div class="card">
+          <img src="https://lh3.googleusercontent.com/p/AF1QipPC9jc1tX3UU8vGtqSs1rakchYK0diT9C_EgYhg=s1360-w1360-h1020-rw" alt="project 2">
+          <h4 style="margin-top:12px">Custom Wardrobe</h4>
+          <p class="muted">Sliding wardrobes with internal organization and LED lighting.</p>
+        </div>
+        <div class="card">
+          <img src="https://lh3.googleusercontent.com/p/AF1QipMl7jsiEIKoMXHWQplfaYUv4hpOptg3BlVqZKGq=s1360-w1360-h1020-rw" alt="project 3">
+          <h4 style="margin-top:12px">TV Unit & Wall Panel</h4>
+          <p class="muted">Walnut finish TV unit with hidden cable management.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / WHY CHOOSE US -->
+    <section id="about" class="container" aria-labelledby="aboutTitle">
+      <h3 id="aboutTitle">Why customers pick Local Mistry</h3>
+      <div class="two-col">
+        <div>
+          <p class="muted">We pride ourselves on expert craftsmanship and comprehensive project management — your space will be both beautiful and functional.</p>
+          <ul style="margin-top:12px">
+            <li class="muted">Experienced craftsmen with an eye for detail.</li>
+            <li class="muted">Transparent pricing & fixed timelines.</li>
+            <li class="muted">Complete project management — from concept to completion.</li>
+            <li class="muted">Post-installation warranty and service.</li>
+          </ul>
+        </div>
+        <aside>
+          <div class="card" style="text-align:center">
+            <strong>Visit our showroom</strong>
+            <p class="muted" style="margin-top:8px">Mumbai, India · By appointment</p>
+            <div style="margin-top:12px"><a class="btn" href="#contact">Book a Visit</a></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="container" aria-labelledby="testiTitle">
+      <h3 id="testiTitle">What clients say</h3>
+      <div class="grid testimonials">
+        <div class="card"><strong>Asha R.</strong><p class="muted" style="margin-top:8px">Excellent craftsmanship and punctual delivery.</p></div>
+        <div class="card"><strong>Rohit S.</strong><p class="muted" style="margin-top:8px">Clean installation and helpful design suggestions.</p></div>
+        <div class="card"><strong>Nisha P.</strong><p class="muted" style="margin-top:8px">Highly recommended — great after-sales service.</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container" aria-labelledby="contactTitle">
+      <h3 id="contactTitle">Get a free site visit & estimate</h3>
+      <div class="two-col" style="align-items:start">
+        <div>
+          <p class="muted">Share quick details — we'll call to schedule a free measurement.</p>
+          <div style="margin-top:12px" class="card">
+            <strong>Contact</strong>
+            <p class="muted" style="margin-top:8px">📞 +91 9769404561<br>✉️ asklocalmistry@gmail.com</p>
+          </div>
+        </div>
+
+        <form id="contactForm" class="card" aria-label="Contact form">
+          <label style="font-weight:700;font-size:13px">Name</label>
+          <input id="name" type="text" required placeholder="Your full name">
+
+          <label style="font-weight:700;font-size:13px">Phone</label>
+          <input id="phone" type="tel" required placeholder="+91 9XXXXXXXXX">
+
+          <label style="font-weight:700;font-size:13px">Project details</label>
+          <textarea id="details" required placeholder="Short description (kitchen / wardrobe / full interior)"></textarea>
+
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button type="submit" class="btn">Request Visit</button>
+            <button type="button" id="emailBtn" style="background:#fff;border:1px solid #e6eef8;color:#0f1724;padding:8px 12px;border-radius:8px;cursor:pointer">Email Us</button>
+          </div>
+
+          <small id="formMsg" style="display:block;margin-top:8px;color:var(--muted)"></small>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="container" aria-labelledby="faqTitle">
+      <h3 id="faqTitle">Frequently asked questions</h3>
+      <div style="display:grid;gap:12px">
+        <details><summary>Do you provide design mockups?</summary><p class="muted" style="margin-top:8px">Yes — we provide on-site measurement and give scopes to the customer to make them understand their vision possibilities</p></details>
+        <details><summary>What is your warranty?</summary><p class="muted" style="margin-top:8px">We offer warranty on workmanship; terms vary by project — ask our team for details.</p></details>
+        <details><summary>How long does a typical wardrobe take?</summary><p class="muted" style="margin-top:8px">Typical delivery & installation: 7–14 days depending on customization.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container foot-grid" aria-label="Footer">
+      <div>
+        <strong>Local Mistry</strong>
+        <p class="muted" style="margin-top:8px">Your one-stop solution for home renovation & interiors.</p>
+      </div>
+      <div>
+        <strong>Quick links</strong>
+        <div style="margin-top:8px">
+          <a href="#projects">Projects</a><br>
+          <a href="#services">Services</a><br>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <div style="margin-top:8px" class="muted">+91 9769404561<br>asklocalmistry@gmail.com</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <small></span> powered by SACHIN INTERIOR</small>
+    </div>
+  </footer>
+
+  <!-- Simple JS (menu + form demo) -->
+  <script>
+    (function(){
+      // Safe DOM references
+      var menuToggle = document.getElementById('menuToggle');
+      var mobileMenu = document.getElementById('mobileMenu');
+      if(menuToggle && mobileMenu){
+        menuToggle.addEventListener('click', function(){
+          var open = mobileMenu.style.display === 'block';
+          mobileMenu.style.display = open ? 'none' : 'block';
+          menuToggle.setAttribute('aria-expanded', String(!open));
+        });
+        // close mobile menu when clicking a link inside it
+        mobileMenu.addEventListener('click', function(e){
+          if(e.target.tagName === 'A'){
+            mobileMenu.style.display = 'none';
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // form handling (demo)
+      var form = document.getElementById('contactForm');
+      var msg = document.getElementById('formMsg');
+      if(form){
+        form.addEventListener('submit', function(ev){
+          ev.preventDefault();
+          var name = document.getElementById('name').value.trim();
+          var phone = document.getElementById('phone').value.trim();
+          var details = document.getElementById('details').value.trim();
+          // basic client-side validation
+          if(!name || !phone || !details){
+            msg.textContent = 'Please fill all fields.';
+            return;
+          }
+          // In production: replace this with a fetch() to your backend endpoint.
+          msg.textContent = 'Thanks — your request has been recorded. We will call you soon.';
+          form.reset();
+          setTimeout(function(){ msg.textContent = ''; }, 6000);
+        });
+      }
+
+      // email button
+      var emailBtn = document.getElementById('emailBtn');
+      if(emailBtn){
+        emailBtn.addEventListener('click', function(){
+          window.location.href = 'mailto:asklocalmistry@gmail.com?subject=Quote%20request';
+        });
+      }
+
+      // set copyright year
+      var copyYear = document.getElementById('copyYear');
+      if(copyYear) copyYear.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
